@@ -1,5 +1,4 @@
 <?php
-	require '../classes/MyPDO.php';
 	require '../classes/TodosData.php';
 
 	$data = new TodosData();
