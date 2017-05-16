@@ -13,22 +13,63 @@
 <html>
 <head>
 	<title> MyTodos </title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css" />
 </head>
 <body>
-<?php
 
-	
-	foreach ($todos as $todo) {
-		if($todo['status'] != 2) {
-	    echo "<h3>" .$todo['title']. " (ID: " .$todo['id']. ")</h3>";
-	    echo "<p>";
-	    echo nl2br($todo['body']);
-	    echo "</p>";
-	    echo "<p><a href='edit.php?id={$todo['id']}'>Edit</a></p>";
-	    echo "<p><a href='delete.php?id={$todo['id']}'>Delete</a></p>";
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">MyTodos</a>
+        </div>
+        <form class="navbar-form navbar-right" role="search">
+            <a href="./add.php" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                Add Task
+            </a>
+        </form>
+    </div>
+</nav>
+
+<div class="container">
+	<?php
+		foreach ($todos as $todo) {
+			if($todo['status'] != 2) {
+	?>
+
+		<section>
+			<div class="row">
+				<div class="col-xs-12">
+					<h3 class="<?= $todo['status'] == 0 ? 'text-warning' : 'text-success' ?>"><?=$todo['title']?>
+					<span class="small">
+						<?= $todo['status'] == 0 ? '<span class="glyphicon glyphicon-remove text-warning"></span>' : '<span class="glyphicon glyphicon-ok text-success"></span>' ?>
+						<a href="./toggle.php?id=<?=$todo['id']?>">
+							<button class="btn btn-primary pull-right">Toggle</button>
+						</a>
+					</span>
+					</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-8">
+					<p><?=nl2br($todo['body'])?></p>
+				</div>
+				<div class="col-xs-4">
+					<p class="pull-right">
+						<a class='btn btn-warning' href='edit.php?id=<?=$todo["body"]?>'>Edit</a>
+						<a class='btn btn-danger' href='delete.php?id=<?=$todo["body"]?>'>Delete</a>
+					</p>
+
+				</div>
+			</div>
+		</section>
+
+	<?php
+			}
 		}
-	}
+	?>
+</div>
 
-?>
+
 </body>
 </html>
