@@ -11,6 +11,7 @@
     echo "<p>";
     echo nl2br($todo['body']);
     echo "</p>";
+    echo "<p><a href='edit.php?id={$todo['id']}'>Edit</a></p>";
 	}
 
 ?>

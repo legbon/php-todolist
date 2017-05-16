@@ -40,5 +40,12 @@
 				':body' => $data['body']
 			]);
 		}
+
+		public function getTodo($id) {
+			$query = $this->db->prepare("SELECT * FROM todos WHERE id = :id LIMIT 1");
+			$query->execute([':id' => $id]);
+			return $query->fetch(PDO::FETCH_ASSOC);
+		}
+
 	}
 ?>
