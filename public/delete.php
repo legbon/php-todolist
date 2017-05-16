@@ -22,18 +22,26 @@ if($todo === false) {
 }
 
 ?>
-<h2>Delete Task</h2>
-<form action="./delete.php?id=<?=$_GET['id']?>" method="POST">
-	<label>
-		Really delete task?
-		<p>
-			<?=$todo['title']?>
-		</p>
-		<p>
-			<?=$todo['body']?>
-		</p>
-	</label>
+<!DOCTYPE html>
+<html>
+<head>
+	<title> MyTodos - Delete </title>
+</head>
+<body>
+	<h2>Delete Task</h2>
+	<form action="./delete.php?id=<?=$_GET['id']?>" method="POST">
+		<label>
+			Really delete task?
+			<p>
+				<?=$todo['title']?>
+			</p>
+			<p>
+				<?=$todo['body']?>
+			</p>
+		</label>
 
-	<input type="hidden" name="id" value="<?=$todo['id'];?>" />
-	<input type="submit" value="Delete Task" />
-</form>
+		<input type="hidden" name="id" value="<?=$todo['id'];?>" />
+		<input type="submit" value="Delete Task" />
+	</form>
+</body>
+</html>

@@ -8,17 +8,25 @@
 	}
 ?>
 
-<h2>New Task</h2>
-<form action="add.php" method="POST">
-	<label>
-		Title: <input type="text" name="title" />
-	</label>
-	<br />
-	<label>
-		Description:
+<!DOCTYPE html>
+<html>
+<head>
+	<title> MyTodos - Add </title>
+</head>
+<body>
+	<h2>New Task</h2>
+	<form action="add.php" method="POST">
+		<label>
+			Title: <input type="text" name="title" />
+		</label>
 		<br />
-		<textarea name="body" cols="50" rows="20"></textarea>
-	</label>
-	<br />
-	<input type="submit" value="Add Task" />
-</form>
+		<label>
+			Description:
+			<br />
+			<textarea name="body" cols="50" rows="20"></textarea>
+		</label>
+		<br />
+		<input type="submit" value="Add Task" />
+	</form>
+</body>
+</html>

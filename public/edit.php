@@ -20,18 +20,27 @@ if($todo === false) {
 }
 
 ?>
-<h2>Edit Task</h2>
-<form action="./edit.php?id=<?=$_GET['id']?>" method="POST">
-	<label>
-		Title: <input type="text" name="title" value="<?=$todo['title'];?>" />
-	</label>
-	<br />
-	<label>
-		Text:
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title> MyTodos - Edit </title>
+</head>
+<body>
+	<h2>Edit Task</h2>
+	<form action="./edit.php?id=<?=$_GET['id']?>" method="POST">
+		<label>
+			Title: <input type="text" name="title" value="<?=$todo['title'];?>" />
+		</label>
 		<br />
-		<textarea name="body" cols="50" rows="20"><?=$todo['body']?></textarea>
-	</label>
-	<br />
-	<input type="hidden" name="id" value="<?=$todo['id'];?>" />
-	<input type="submit" value="Edit Task" />
-</form>
+		<label>
+			Text:
+			<br />
+			<textarea name="body" cols="50" rows="20"><?=$todo['body']?></textarea>
+		</label>
+		<br />
+		<input type="hidden" name="id" value="<?=$todo['id'];?>" />
+		<input type="submit" value="Edit Task" />
+	</form>
+</body>
+</html>

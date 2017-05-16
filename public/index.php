@@ -6,6 +6,18 @@
 
 	$todos = $data->getAllTodos();
 
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title> MyTodos </title>
+</head>
+<body>
+<?php
+
+	
 	foreach ($todos as $todo) {
 		if($todo['status'] != 2) {
 	    echo "<h3>" .$todo['title']. " (ID: " .$todo['id']. ")</h3>";
@@ -18,3 +30,5 @@
 	}
 
 ?>
+</body>
+</html>
