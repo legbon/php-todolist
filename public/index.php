@@ -7,11 +7,14 @@
 	$todos = $data->getAllTodos();
 
 	foreach ($todos as $todo) {
-    echo "<h3>" .$todo['title']. " (ID: " .$todo['id']. ")</h3>";
-    echo "<p>";
-    echo nl2br($todo['body']);
-    echo "</p>";
-    echo "<p><a href='edit.php?id={$todo['id']}'>Edit</a></p>";
+		if($todo['status'] != 2) {
+	    echo "<h3>" .$todo['title']. " (ID: " .$todo['id']. ")</h3>";
+	    echo "<p>";
+	    echo nl2br($todo['body']);
+	    echo "</p>";
+	    echo "<p><a href='edit.php?id={$todo['id']}'>Edit</a></p>";
+	    echo "<p><a href='delete.php?id={$todo['id']}'>Delete</a></p>";
+		}
 	}
 
 ?>

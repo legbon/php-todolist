@@ -47,5 +47,33 @@
 			return $query->fetch(PDO::FETCH_ASSOC);
 		}
 
+		public function update(array $data) {
+			$query = $this->db->prepare("
+					UPDATE todos SET 
+						title = :title,
+						body = :body
+					 WHERE id = :id;
+				");
+
+			return $query->execute([
+				':title' => $data['title'],
+				':body' => $data['body'],
+				':id' => $data['id']
+			]);
+		}		
+
+		public function delete(array $data) {
+			$query = $this->db->prepare("
+					UPDATE todos SET 
+						status = :status
+					 WHERE id = :id;
+				");
+
+			return $query->execute([
+				':id' => $data['id'],
+				':status' => 2
+			]);
+		}
+
 	}
 ?>
