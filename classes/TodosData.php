@@ -75,5 +75,17 @@
 			]);
 		}
 
+		public function hardDelete(array $data) {
+			$query = $this->db->prepare(
+			    "DELETE FROM todos
+			        WHERE
+			            id = :id"
+			);
+
+			return $query->execute([
+			    ':id' => $data['id'],
+			]);
+		}
+
 	}
 ?>
