@@ -56,8 +56,8 @@
 				</div>
 				<div class="col-xs-4">
 					<p class="pull-right">
-						<a class='btn btn-warning' href='edit.php?id=<?=$todo["body"]?>'>Edit</a>
-						<a class='btn btn-danger' href='delete.php?id=<?=$todo["body"]?>'>Delete</a>
+						<a class='btn btn-warning' href='edit.php?id=<?=$todo["id"]?>'>Edit</a>
+						<a class='btn btn-danger' href='delete.php?id=<?=$todo["id"]?>'>Delete</a>
 					</p>
 
 				</div>
