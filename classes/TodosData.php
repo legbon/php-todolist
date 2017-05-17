@@ -87,5 +87,30 @@
 			]);
 		}
 
+		public function toggle(array $data) {
+			$query = $this->db->prepare(
+					"UPDATE todos SET status = :status WHERE id = :id;"
+				);
+
+			$task = $this->getTodo($data['id']);
+			
+			if($task === false) {
+				return $task;
+			}
+
+			if($task['status'] == 0) {
+				$task = 1;
+			} elseif($task['status'] == 1) {
+				$task = 0;
+			}
+
+			$query->execute([
+					':id' => $data['id'],
+					':status' => $task
+				]);
+
+
+		}
+
 	}
 ?>

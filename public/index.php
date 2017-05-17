@@ -43,9 +43,10 @@
 					<h3 class="<?= $todo['status'] == 0 ? 'text-warning' : 'text-success' ?>"><?=$todo['title']?>
 					<span class="small">
 						<?= $todo['status'] == 0 ? '<span class="glyphicon glyphicon-remove text-warning"></span>' : '<span class="glyphicon glyphicon-ok text-success"></span>' ?>
-						<a href="./toggle.php?id=<?=$todo['id']?>">
+						<form action="./toggle.php" method="POST">
 							<button class="btn btn-primary pull-right">Toggle</button>
-						</a>
+							<input type="hidden" name="id" value="<?=$todo['id']?>" />
+						</form>
 					</span>
 					</h3>
 				</div>
