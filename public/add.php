@@ -1,5 +1,5 @@
 <?php
-require '../src/Suggestotron/Autoloader.php';
+require '../src/BadTodoSample/Autoloader.php';
 	if (isset($_POST) && sizeof($_POST) > 0) {
 		$data = new \BadTodoSample\TodosData();
 		$data->add($_POST);

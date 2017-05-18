@@ -1,5 +1,5 @@
 <?php
-require '../src/Suggestotron/Autoloader.php';
+require '../src/BadTodoSample/Autoloader.php';
 
 $data = new \BadTodoSample\TodosData();
 
