@@ -1,32 +1,14 @@
 <?php
 	require '../src/BadTodoSample/TodosData.php';
+	require '../src/BadTodoSample/Template.php';
 	if (isset($_POST) && sizeof($_POST) > 0) {
 		$data = new \BadTodoSample\TodosData();
 		$data->add($_POST);
 		header("Location: /");
 		exit;
-	}
-?>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title> MyTodos - Add </title>
-</head>
-<body>
-	<h2>New Task</h2>
-	<form action="add.php" method="POST">
-		<label>
-			Title: <input type="text" name="title" />
-		</label>
-		<br />
-		<label>
-			Description:
-			<br />
-			<textarea name="body" cols="50" rows="20"></textarea>
-		</label>
-		<br />
-		<input type="submit" value="Add Task" />
-	</form>
-</body>
-</html>
+	}
+	$template = new \BadTodoSample\Template("../views/base.phtml");
+	$template->render("../views/index/add.phtml");
+?>
+ 

@@ -1,5 +1,7 @@
 <?php
 require '../src/BadTodoSample/TodosData.php';
+require '../src/BadTodoSample/Template.php';
+
 $data = new \BadTodoSample\TodosData();
 
 if((isset($_POST)) && (sizeof($_POST) > 0)) {
@@ -21,27 +23,7 @@ if($todo === false) {
 	exit;
 }
 
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title> MyTodos - Delete </title>
-</head>
-<body>
-	<h2>Delete Task</h2>
-	<form action="./delete.php?id=<?=$_GET['id']?>" method="POST">
-		<label>
-			Really delete task?
-			<p>
-				<?=$todo['title']?>
-			</p>
-			<p>
-				<?=$todo['body']?>
-			</p>
-		</label>
+$template = new \BadTodoSample\Template("../views/base.phtml");
+$template->render("../views/index/delete.phtml", ["todo" => $todo]);
 
-		<input type="hidden" name="id" value="<?=$todo['id'];?>" />
-		<input type="submit" value="Delete Task" />
-	</form>
-</body>
-</html>
+?>
