@@ -1,6 +1,5 @@
 <?php
-	require '../src/BadTodoSample/TodosData.php';
-	require '../src/BadTodoSample/Template.php';
+require '../src/Suggestotron/Autoloader.php';
 
 	$data = new \BadTodoSample\TodosData();
 

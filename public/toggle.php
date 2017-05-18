@@ -1,5 +1,5 @@
 <?php
-	require '../src/BadTodoSample/TodosData.php';
+	require '../src/Suggestotron/Autoloader.php';
 	if((isset($_POST)) && (sizeof($_POST) > 0)) {
 		$data = new \BadTodoSample\TodosData();
 		$data->toggle($_POST);
