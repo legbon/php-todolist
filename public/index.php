@@ -1,7 +1,7 @@
 <?php
-	require '../classes/TodosData.php';
+	require '../src/BadTodoSample/TodosData.php';
 
-	$data = new TodosData();
+	$data = new \BadTodoSample\TodosData();
 	$data->connect();
 
 	$todos = $data->getAllTodos();

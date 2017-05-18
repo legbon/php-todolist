@@ -1,6 +1,7 @@
 <?php
 	declare(strict_types=1);
-
+	namespace BadTodoSample;
+	
 	require 'MyPDO.php';
 
 	class TodosData {
@@ -13,7 +14,7 @@
 
 		// Create connect function. 
 		public function connect() {
-				$this->db = new MyPDO();	
+				$this->db = new \BadTodoSample\MyPDO();	
 		}
 
 		public function getAllTodos() {
@@ -44,7 +45,7 @@
 		public function getTodo($id) {
 			$query = $this->db->prepare("SELECT * FROM todos WHERE id = :id LIMIT 1");
 			$query->execute([':id' => $id]);
-			return $query->fetch(PDO::FETCH_ASSOC);
+			return $query->fetch(\PDO::FETCH_ASSOC);
 		}
 
 		public function update(array $data) {

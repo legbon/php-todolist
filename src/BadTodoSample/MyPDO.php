@@ -1,5 +1,7 @@
 <?php
-class MyPDO extends PDO
+namespace BadTodoSample;
+
+class MyPDO extends \PDO
 {
 	public $dbname;
     public function __construct($file = '../config/db_settings.ini')

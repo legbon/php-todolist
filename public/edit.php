@@ -1,6 +1,6 @@
 <?php
-require '../classes/TodosData.php';
-$data = new TodosData();
+require '../src/BadTodoSample/TodosData.php';
+$data = new \BadTodoSample\TodosData();
 
 if((isset($_POST)) && (sizeof($_POST) > 0)) {
 	$data->update($_POST);

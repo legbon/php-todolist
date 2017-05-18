@@ -1,7 +1,7 @@
 <?php
-	require '../classes/TodosData.php';
+	require '../src/BadTodoSample/TodosData.php';
 	if (isset($_POST) && sizeof($_POST) > 0) {
-		$data = new TodosData();
+		$data = new \BadTodoSample\TodosData();
 		$data->add($_POST);
 		header("Location: /");
 		exit;
