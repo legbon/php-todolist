@@ -1,0 +1,10 @@
+<?php
+return [
+    "username" => "",
+    "password" => "",
+    "hostname" => "",
+    "dbname" => "",
+    "driver" => "",
+    "port" => ""
+];
+?>

@@ -4,18 +4,18 @@ namespace BadTodoSample;
 class MyPDO extends \PDO
 {
 	public $dbname;
-    public function __construct($file = '../config/db_settings.ini')
+    public function __construct()
     {
-        if (!$settings = parse_ini_file($file, TRUE)) throw new exception('Unable to open ' . $file . '.');
-       
-        $dsn = $settings['database']['driver'] .
-        ':host=' . $settings['database']['host'] .
-        ((!empty($settings['database']['port'])) ? (';port=' . $settings['database']['port']) : '') .
-        ';dbname=' . $settings['database']['schema'];
+        $config = \BadTodoSample\Config::get('database');
 
-        $this->dbname = $settings['database']['schema'];
+        $dsn = $config['driver'] .
+        ':host=' . $config['hostname'] .
+        ((!empty($config['port'])) ? (';port=' . $config['port']) : '') .
+        ';dbname=' . $config['dbname'];
+
+        $this->dbname = $config['dbname'];
        
-        parent::__construct($dsn, $settings['database']['username'], $settings['database']['password']);
+        parent::__construct($dsn, $config['username'], $config['password']);
     }
 }
 ?>

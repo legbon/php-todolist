@@ -1,9 +1,13 @@
 <?php
 namespace BadTodoSample;
+require_once 'Config.php';
+\BadTodoSample\Config::setDirectory('../config');
 
 class Autoloader {
 	public function load($className) {
-		$file = __DIR__ . "/../" . str_replace("\\", "/", $className) . ".php";
+		$config = \BadTodoSample\Config::get('autoload');
+
+		$file = $config['class_path'] . "/" . str_replace("\\", "/", $className) . ".php";
 		if(file_exists($file)) {
 			require $file;
 		} else {
