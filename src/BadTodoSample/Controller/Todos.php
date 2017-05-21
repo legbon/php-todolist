@@ -4,32 +4,44 @@ namespace BadTodoSample\Controller;
 
 class Todos {
 	
+	protected $ata;
+	protected $template;
+	protected $config;
+
+	public function __construct() {
+		$this->config = \BadTodoSample\Config::get('site');
+		$this->data = new \BadTodoSample\TodosData();
+		$this->template = new \BadTodoSample\Template($this->config['view_path'] . "/base.phtml");
+	}
+
+	public function render($template, $data = array()) {
+		$this->template->render($this->config['view_path'] . "/" . $template, $data);
+	}
+
 	public function listAction() {
-		$data = new \BadTodoSample\TodosData();
+		
 
-		$todos = $data->getAllTodos();
+		$todos = $this->data->getAllTodos();
 
-		$template = new \BadTodoSample\Template("../views/base.phtml");
-		$template->render("../views/index/list.phtml", ['todos' => $todos]);
+		
+		$this->render("index/list.phtml", ['todos' => $todos]);
 	}
 
 	public function addAction() {
 		if (isset($_POST) && sizeof($_POST) > 0) {
-			$data = new \BadTodoSample\TodosData();
-			$data->add($_POST);
+			$this->data->add($_POST);
 			header("Location: /");
 			exit;
 
 		}
-		$template = new \BadTodoSample\Template("../views/base.phtml");
-		$template->render("../views/index/add.phtml");
+		
+		$this->render("index/add.phtml");
 	}
 
 	public function editAction() {
-		$data = new \BadTodoSample\TodosData();
 
 		if((isset($_POST)) && (sizeof($_POST) > 0)) {
-			$data->update($_POST);
+			$this->data->update($_POST);
 			header("Location: /");
 		}
 
@@ -38,22 +50,21 @@ class Todos {
 				exit;
 		}
 
-		$todo = $data->getTodo($_GET['id']);
+		$todo = $this->data->getTodo($_GET['id']);
 
 		if($todo === false) {
 			echo "Task not found.";
 			exit;
 		}
 
-		$template = new \BadTodoSample\Template("../views/base.phtml");
-		$template->render("../views/index/edit.phtml", ["todo" => $todo]);
+		
+		$this->render("index/edit.phtml", ["todo" => $todo]);
 	}
 
 	public function deleteAction() {
-		$data = new \BadTodoSample\TodosData();
 
 		if((isset($_POST)) && (sizeof($_POST) > 0)) {
-			$data->delete($_POST);
+			$this->data->delete($_POST);
 			echo "Update successful!";
 			header("Location: /");
 			exit;
@@ -64,22 +75,21 @@ class Todos {
 				exit;
 		}
 
-		$todo = $data->getTodo($_GET['id']);
+		$todo = $this->data->getTodo($_GET['id']);
 
 		if($todo === false) {
 			echo "Task not found.";
 			exit;
 		}
 
-		$template = new \BadTodoSample\Template("../views/base.phtml");
-		$template->render("../views/index/delete.phtml", ["todo" => $todo]);
+		
+		$this->render("index/delete.phtml", ["todo" => $todo]);
 	}
 
 	public function toggleAction() {
 		if((isset($_POST)) && (sizeof($_POST) > 0)) {
-			$data = new \BadTodoSample\TodosData();
-			$data->toggle($_POST);
-			if($data === false) {
+			$this->data->toggle($_POST);
+			if($this->data === false) {
 				echo "Task not found.";
 			} else {
 				echo "Update successful!";

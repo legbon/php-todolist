@@ -3,13 +3,20 @@ namespace BadTodoSample;
 
 class Router {
 	public function start($route) {
-		$path = realpath("./" . $route . ".php");
-		
-		if(file_exists($path)) {
-			require $path;
-		} else {
-			require 'error.php';
+
+		if($route[0] == "/") {
+			$route = substr($route, 1);
 		}
+
+		$controller = new \BadTodoSample\Controller\Todos();
+
+		$method = [$controller, $route . 'Action'];
+
+		if(is_callable($method)) {
+			return $method();
+		}
+		
+		require 'error.php';
 	}
 }
 ?>
