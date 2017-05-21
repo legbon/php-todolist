@@ -1,6 +1,6 @@
 <?php $todo = $this->todo; ?>
 <h2>Edit Task</h2>
-<form action="/edit?id=<?=$_GET['id']?>" method="POST">
+<form action="/tasks/edit?id=<?=$_GET['id']?>" method="POST">
 	<label>
 		Title: <input type="text" name="title" value="<?=$todo['title'];?>" />
 	</label>

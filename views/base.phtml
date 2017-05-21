@@ -5,9 +5,9 @@ $config = \BadTodoSample\Config::get('site');
 <html>
 <head>
 	<title> <?=$config['title']?> </title>
-	<link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css" />
-	<script type="text/javascript" src="./assets/js/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
+	<script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -17,7 +17,7 @@ $config = \BadTodoSample\Config::get('site');
             <a class="navbar-brand" href="/"><?= isset($config['title']) ? $config['title'] : "TodoSample" ?></a>
         </div>
         <form class="navbar-form navbar-right" role="search">
-            <a href="add" class="btn btn-default">
+            <a href="/tasks/add" class="btn btn-default">
                 <span class="glyphicon glyphicon-plus-sign"></span>
                 <?= isset($config['btn_addtask_label']) ? $config['btn_addtask_label'] : "Add Task" ?>
             </a>

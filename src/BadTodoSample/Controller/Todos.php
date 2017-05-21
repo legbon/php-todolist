@@ -2,23 +2,16 @@
 
 namespace BadTodoSample\Controller;
 
-class Todos {
+class Todos extends \BadTodoSample\Controller {
 	
 	protected $ata;
-	protected $template;
-	protected $config;
 
 	public function __construct() {
-		$this->config = \BadTodoSample\Config::get('site');
+		parent::__construct();
 		$this->data = new \BadTodoSample\TodosData();
-		$this->template = new \BadTodoSample\Template($this->config['view_path'] . "/base.phtml");
 	}
 
-	public function render($template, $data = array()) {
-		$this->template->render($this->config['view_path'] . "/" . $template, $data);
-	}
-
-	public function listAction() {
+	public function listAction($options) {
 		
 
 		$todos = $this->data->getAllTodos();
@@ -27,7 +20,7 @@ class Todos {
 		$this->render("index/list.phtml", ['todos' => $todos]);
 	}
 
-	public function addAction() {
+	public function addAction($options) {
 		if (isset($_POST) && sizeof($_POST) > 0) {
 			$this->data->add($_POST);
 			header("Location: /");
@@ -38,19 +31,19 @@ class Todos {
 		$this->render("index/add.phtml");
 	}
 
-	public function editAction() {
+	public function editAction($options) {
 
 		if((isset($_POST)) && (sizeof($_POST) > 0)) {
 			$this->data->update($_POST);
 			header("Location: /");
 		}
 
-		if(!isset($_GET) && empty($_GET['id'])) {
+		if(!isset($options) && empty($options['id'])) {
 				echo "You did not pass an id.";
 				exit;
 		}
 
-		$todo = $this->data->getTodo($_GET['id']);
+		$todo = $this->data->getTodo($options['id']);
 
 		if($todo === false) {
 			echo "Task not found.";
@@ -61,7 +54,7 @@ class Todos {
 		$this->render("index/edit.phtml", ["todo" => $todo]);
 	}
 
-	public function deleteAction() {
+	public function deleteAction($options) {
 
 		if((isset($_POST)) && (sizeof($_POST) > 0)) {
 			$this->data->delete($_POST);
@@ -70,12 +63,12 @@ class Todos {
 			exit;
 		}
 
-		if(!isset($_GET) && empty($_GET['id'])) {
+		if(!isset($options) && empty($options['id'])) {
 				echo "You did not pass an id.";
 				exit;
 		}
 
-		$todo = $this->data->getTodo($_GET['id']);
+		$todo = $this->data->getTodo($options['id']);
 
 		if($todo === false) {
 			echo "Task not found.";
@@ -86,7 +79,7 @@ class Todos {
 		$this->render("index/delete.phtml", ["todo" => $todo]);
 	}
 
-	public function toggleAction() {
+	public function toggleAction($options) {
 		if((isset($_POST)) && (sizeof($_POST) > 0)) {
 			$this->data->toggle($_POST);
 			if($this->data === false) {

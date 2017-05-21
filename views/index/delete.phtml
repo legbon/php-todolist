@@ -1,7 +1,7 @@
 <?php $todo = $this->todo; ?>
 
 <h2>Delete Task</h2>
-<form action="/delete?id=<?=$_GET['id']?>" method="POST">
+<form action="/tasks/delete/<?=$_GET['id']?>" method="POST">
 	<label>
 		Really delete task?
 		<p>
