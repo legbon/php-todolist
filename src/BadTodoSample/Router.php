@@ -2,21 +2,68 @@
 namespace BadTodoSample;
 
 class Router {
+	protected $config;
+
 	public function start($route) {
+		$this->config = \BadTodoSample\Config::get('routes');
 
-		if($route[0] == "/") {
-			$route = substr($route, 1);
+		if(empty($route) || $route == "/") {
+			if(isset($this->config['default'])) {
+				$route = $this->config['default'];
+			} else {
+				$this->error();
+			}
 		}
 
-		$controller = new \BadTodoSample\Controller\Todos();
+		try {
+			foreach ($this->config['routes'] as $path => $defaults) {
+				$regex = '@' .preg_replace(
+					'@:([\w]+)@',
+          '(?P<$1>[^/]+)',
+          str_replace(')', ')?', (string) $path)
+				). '@';
+				$matches = [];
 
-		$method = [$controller, $route . 'Action'];
+				if(preg_match($regex, $route, $matches)) {
+					$options = $defaults;
+					foreach ($matches as $key => $value) {
+						if (is_numeric($key)) {
+							continue;
+						}
 
-		if(is_callable($method)) {
-			return $method();
+						$options[$key] = $value;
+						if (isset($defaults[$key])) {
+							if (strpos($defaults[$key], ":$key") !== false) {
+								$options[$key] = str_replace(":$key", $value, $defaults[$key]);
+							}
+						}
+					}
+
+					if(isset($options['controller']) && isset($options['action'])) {
+						$callable = [$options['controller'], $options['action'] . 'Action' ];
+						if(is_callable($callable)) {
+							$callable = [new $options['controller'], $options['action'] . 'Action'];
+							$callable($options);
+							return;
+						} else {
+							$this->error();
+						}
+					} else {
+						$this->error();
+					}
+
+				}
+
+			}
+		} catch (\BadTodoSample\Controller\Exception $e) {
+			$this->error();
 		}
-		
-		require 'error.php';
+
 	}
+
+	public function error() {
+		
+	}
+
 }
 ?>
